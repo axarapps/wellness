@@ -151,3 +151,5 @@ body.gated main { visibility: hidden; }
 .support { background: #16423C; border-color: #2E6B60; }
 .support .t b { color: #F4F7F6; } .support .t span { color: #9FC2BA; } .support .heart { background: #E9A3B5; color: #16423C; } .support .chev { color: #E9A3B5; }
 .dep .tab.on { color: #FCD535; }
+.more-art { margin: 10px 0 0; text-align: center; font-size: 14px; }
+.more-art a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
