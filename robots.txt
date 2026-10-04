@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://axarapps.github.io/wellness/sitemap.xml

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wellness Guides: yoga poses, mudras, breathing and more</title>
+<meta name="description" content="310 free wellness guides: yoga poses, mudras, breathing exercises, meditation, stretches, face yoga, marma points and eye exercises.">
+<link rel="canonical" href="https://axarapps.github.io/wellness/">
+
+<meta name="theme-color" content="#16423C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/app-180.png">
+<meta property="og:type" content="website"><meta property="og:title" content="Wellness Guides: yoga poses, mudras, breathing and more"><meta property="og:description" content="310 free wellness guides: yoga poses, mudras, breathing exercises, meditation, stretches, face yoga, marma points and eye exercises.">
+<meta property="og:image" content="https://axarapps.github.io/wellness/og/home.png"><meta property="og:url" content="https://axarapps.github.io/wellness/"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <div class="fixed" id="support-host"></div>
+  <a class="top" href=""><img src="icons/app-192.png" alt="" width="44" height="44"><b>Wellness Guides</b></a>
+  <main>
+    <h1>Wellness Guides</h1>
+    <p class="lead">Yoga, breathing, mudras, stretching, meditation and more. 310 free guides with illustrations, clear steps and benefits. No ads, no sign-up.</p>
+    <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="hq" type="search" placeholder="Search all guides, like calm or back" autocomplete="off" aria-label="Search all guides"></div>
+    <div id="results" hidden></div>
+    <div class="tiles" id="tiles"><a class="tl" href="mudras/"><img src="assets/tiles/mudras.png" alt="" width="52" height="52" loading="lazy"><b>Mudras</b><small>64 mudras</small></a><a class="tl" href="yoga-poses/"><img src="assets/tiles/yoga-poses.png" alt="" width="52" height="52" loading="lazy"><b>Yoga Poses</b><small>100 poses</small></a><a class="tl" href="breathing/"><img src="assets/tiles/breathing.png" alt="" width="52" height="52" loading="lazy"><b>Breathing Exercises</b><small>12 techniques</small></a><a class="tl" href="meditation/"><img src="assets/tiles/meditation.png" alt="" width="52" height="52" loading="lazy"><b>Meditation</b><small>24 techniques</small></a><a class="tl" href="stretches/"><img src="assets/tiles/stretches.png" alt="" width="52" height="52" loading="lazy"><b>Stretches</b><small>24 stretchs</small></a><a class="tl" href="face-yoga/"><img src="assets/tiles/face-yoga.png" alt="" width="52" height="52" loading="lazy"><b>Face Yoga</b><small>32 exercises</small></a><a class="tl" href="marma-points/"><img src="assets/tiles/marma-points.png" alt="" width="52" height="52" loading="lazy"><b>Marma Points</b><small>28 points</small></a><a class="tl" href="eye-exercises/"><img src="assets/tiles/eye-exercises.png" alt="" width="52" height="52" loading="lazy"><b>Eye Exercises</b><small>14 exercises</small></a><a class="tl" href="pelvic-floor/"><img src="assets/tiles/pelvic-floor.png" alt="" width="52" height="52" loading="lazy"><b>Pelvic Floor</b><small>12 techniques</small></a><a class="tl" href="kama-sutra/"><img src="assets/tiles/kama-sutra.png" alt="" width="52" height="52" loading="lazy"><b>Kama Sutra</b><small class=adult>18+ only</small></a></div>
+  </main>
+  <footer><span>© aXar</span><a href="">All guides</a><a href="privacy.html">Privacy</a><a href="https://axarapps.github.io/games/">Tap Arcade</a><a href="https://axarapps.github.io/radio/">World Radio</a></footer>
+</div>
+<div class="toast" id="toast">Address copied</div>
+<script src="support.js"></script>
+<script>
+(function () {
+  var q = document.getElementById('hq'), res = document.getElementById('results'), tiles = document.getElementById('tiles'), idx = null, loading = false, waiting = [];
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function load(cb) {
+    if (idx) return cb();
+    waiting.push(cb);
+    if (loading) return;
+    loading = true;
+    fetch('search.json').then(function (r) { return r.json(); }).then(function (d) { idx = d; waiting.splice(0).forEach(function (f) { f(); }); }).catch(function () { loading = false; });
+  }
+  function show() {
+    var term = q.value.trim().toLowerCase();
+    if (term.length < 2) { res.hidden = true; tiles.hidden = false; return; }
+    load(function () {
+      var hits = idx.filter(function (e) { return e[4].indexOf(term) >= 0; });
+      hits.sort(function (a, b) { return (a[2].toLowerCase().indexOf(term) === 0 ? 0 : 1) - (b[2].toLowerCase().indexOf(term) === 0 ? 0 : 1); });
+      tiles.hidden = true; res.hidden = false;
+      res.innerHTML = hits.length ? '<ul class="list">' + hits.slice(0, 60).map(function (e) {
+        return '<li><a href="' + e[0] + '/' + e[1] + '/"><span class="th"><img src="' + e[5] + '" alt="" loading="lazy" width="60" height="60"></span><span class="txt"><span class="guide">' + esc(e[6]) + '</span><b>' + esc(e[2]) + '</b><small>' + esc(e[3]) + '</small></span></a></li>';
+      }).join('') + '</ul>' : '<p class="empty">Nothing found. Try another word, like "calm", "back" or "eyes".</p>';
+    });
+  }
+  q.addEventListener('input', show);
+  q.addEventListener('focus', function () { load(function () {}); }, { once: true });
+})();
+</script>
+</body>
+</html>
