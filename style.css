@@ -153,3 +153,8 @@ body.gated main { visibility: hidden; }
 .dep .tab.on { color: #FCD535; }
 .more-art { margin: 10px 0 0; text-align: center; font-size: 14px; }
 .more-art a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.about-btn { flex: none; width: 44px; height: 44px; margin-top: 6px; display: grid; place-items: center; border-radius: 50%; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+.about-btn svg { width: 22px; height: 22px; }
+.about-btn:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
