@@ -12,7 +12,8 @@
   :root{--bg:#F4F7F6; --text:#16423C; --muted:#5C7A74; --accent:#C97086; --on-accent:#fff; --panel:#fff; --line:rgba(22,66,60,.14);}@media(prefers-color-scheme:dark){:root{--bg:#0F1D1B; --text:#E4F0ED; --muted:#8FB0A9; --accent:#E9A3B5; --on-accent:#16423C; --panel:#162826; --line:rgba(255,255,255,.1);}}
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, sans-serif; }
   main { max-width: 680px; margin: 0 auto; padding: 0 16px 56px; }
-  .bar { position: sticky; top: 0; z-index: 10; margin: 0 -16px; padding: max(10px, env(safe-area-inset-top)) 16px 10px; background: color-mix(in srgb, var(--bg) 94%, transparent); }
+  .bar { position: sticky; top: 0; z-index: 10; margin: 0 -16px; padding: max(10px, env(safe-area-inset-top)) 16px 10px; background: color-mix(in srgb, var(--bg) 94%, transparent);  display: flex; align-items: center; gap: 12px; }
+  .bt { font-size: 20px; font-weight: 700; }
   .bar a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); color: var(--text); }
   .bar svg { width: 22px; height: 22px; }
   .bar a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -34,7 +35,7 @@
 </head>
 <body>
 <main>
-  <div class="bar"><a href="./" data-back="/wellness/" aria-label="All guides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a></div>
+  <div class="bar"><a href="./" data-back="/wellness/" aria-label="All guides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><span class="bt">About</span></div>
   <div class="head"><img src="icons/app-192.png" alt="" width="56" height="56"><h1>Wellness Guides</h1></div>
   <p>Yoga, breathing, mudras, stretching, meditation and more. 310 free guides with illustrations, clear steps and benefits. No ads, no sign-up.</p>
   <div class="chips"><span class="chip">No ads</span><span class="chip">No sign-up</span><span class="chip">310 guides</span><span class="chip">Illustrated</span><span class="chip">Works offline</span></div>
