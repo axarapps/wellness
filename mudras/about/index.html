@@ -21,7 +21,7 @@
 <body>
 
 <div class="wrap">
-  <div class="topbar fam"><a class="about-btn backbtn" href="../" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><a class="top" href="../../mudras/"><img src="../../assets/tiles/mudras.png" alt="" width="44" height="44"><b>Mudras</b></a></div>
+  <div class="topbar fam"><a class="about-btn backbtn" href="../" data-back="/wellness/" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></a><a class="top" href="../../mudras/"><img src="../../assets/tiles/mudras.png" alt="" width="44" height="44"><b>Mudras</b></a></div>
 
   <main>
     <h1>About Mudras</h1>
@@ -42,6 +42,7 @@
 <div class="toast" id="toast">Address copied</div>
 <script src="../../support.js?v=7ced095daa"></script>
 <script src="../../install.js?v=7ced095daa"></script>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('a[data-back]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;try{var r=new URL(document.referrer);if(r.origin===location.origin&&r.pathname.indexOf(a.dataset.back)===0&&history.length>1){e.preventDefault();history.back();}}catch(_){}});</script>
 <script>
 (function () {
   var btn = document.getElementById('share'), t = document.getElementById('share-t'), url = btn.dataset.url, name = btn.dataset.name;

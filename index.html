@@ -38,6 +38,7 @@
 <div class="toast" id="toast">Address copied</div>
 <script src="support.js?v=7ced095daa"></script>
 <script src="install.js?v=7ced095daa"></script>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('a[data-back]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;try{var r=new URL(document.referrer);if(r.origin===location.origin&&r.pathname.indexOf(a.dataset.back)===0&&history.length>1){e.preventDefault();history.back();}}catch(_){}});</script>
 <script>
 (function () {
   var q = document.getElementById('hq'), res = document.getElementById('results'), tiles = document.getElementById('tiles'), idx = null, loading = false, waiting = [];
