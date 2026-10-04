@@ -47,7 +47,7 @@
     document.querySelectorAll('.group').forEach(function (grp) {
       var any = 0;
       grp.querySelectorAll('li').forEach(function (li) {
-        var ok = (!term || li.dataset.q.indexOf(term) >= 0) && (!fam || li.dataset.fam === fam);
+        var ok = (!term || li.dataset.q.indexOf(term) >= 0) && (!fam || ('|' + li.dataset.fam + '|').indexOf('|' + fam + '|') >= 0);
         li.hidden = !ok; if (ok) any++;
       });
       grp.hidden = !any; shown += any;
