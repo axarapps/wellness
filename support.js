@@ -4,8 +4,8 @@ const $ = (id) => document.getElementById(id);
 const ICON = { chev: '<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' };
 function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 1800); }
 const TOKENS = {
-  sol: { coin: 'S', name: 'Solana', ticker: 'SOL', network: 'Solana', min: '0.001 SOL', qr: BASE + 'icons/qr-sol.png', note: 'Please note that SOL addresses are case sensitive.' },
-  usdc: { coin: '$', name: 'USD Coin', ticker: 'USDC', network: 'Solana', min: '0.001 USDC', qr: BASE + 'icons/qr-usdc.png', note: 'USDC is sent on the Solana network. The address is case sensitive.' },
+  sol: { coin: 'S', name: 'Solana', ticker: 'SOL', network: 'Solana', min: '0.001 SOL', qr: BASE + 'icons/qr-sol.png', note: 'SOL addresses are case sensitive.' },
+  usdc: { coin: '$', name: 'USD Coin', ticker: 'USDC', network: 'Solana', min: '0.001 USDC', qr: BASE + 'icons/qr-usdc.png', note: 'Send USDC on the Solana network. Case sensitive.' },
 };
 function supportHtml() {
   const tab = (id) => `<button type="button" class="tab" data-token="${id}" role="tab"><i class="coin ${id}">${TOKENS[id].coin}</i>${TOKENS[id].ticker}</button>`;
@@ -16,7 +16,7 @@ function supportHtml() {
     <div class="body"><div class="dep">
       <div class="tabs" role="tablist">${tab('sol')}${tab('usdc')}</div>
       <div class="dcard">
-        <div class="qrbox"><img id="dep-qr" src="${BASE}icons/qr-sol.png" alt="QR code of the wallet address" width="180" height="180"></div>
+        <div class="qrbox"><img id="dep-qr" src="${BASE}icons/qr-sol.png" alt="QR code of the wallet address" width="132" height="132"></div>
         <div class="k">Wallet address</div>
         <div class="addrrow">
           <div class="addr3" title="${WALLET}"><span><i>${WALLET.slice(0, 6)}</i>${WALLET.slice(6, 22)}</span><span>${WALLET.slice(22, -6)}<i>${WALLET.slice(-6)}</i></span></div>
@@ -27,10 +27,8 @@ function supportHtml() {
         <div class="grid2">
           <div><span class="k">Token</span><span class="v" id="dep-token"></span></div>
           <div><span class="k">Minimum</span><span class="v" id="dep-min"></span></div>
-          <div><span class="k">Address for</span><span class="v">SOL and USDC</span></div>
-          <div><span class="k">Network</span><span class="v">Solana</span></div>
         </div>
-        <p class="fine">Double-check every character before sending. Crypto transfers cannot be reversed. Only send on the Solana network.</p>
+        <p class="fine">Same address for SOL and USDC, on the Solana network. Double-check every character: crypto transfers cannot be reversed.</p>
       </div>
     </div></div></div>`;
 }
