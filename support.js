@@ -4,19 +4,19 @@ const $ = (id) => document.getElementById(id);
 const ICON = { chev: '<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' };
 function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 1800); }
 const TOKENS = {
-  sol: { coin: 'S', name: 'Solana', ticker: 'SOL', network: 'Solana', min: '0.001 SOL', qr: BASE + 'icons/qr-sol.png', note: 'SOL addresses are case sensitive.' },
-  usdc: { coin: '$', name: 'USD Coin', ticker: 'USDC', network: 'Solana', min: '0.001 USDC', qr: BASE + 'icons/qr-usdc.png', note: 'Send USDC on the Solana network. Case sensitive.' },
+  sol: { coin: 'S', name: 'Solana', ticker: 'SOL', network: 'Solana', min: '0.001 SOL', qr: BASE + 'icons/qr-sol.png', note: 'Please note that SOL addresses are case sensitive.' },
+  usdc: { coin: '$', name: 'USD Coin', ticker: 'USDC', network: 'Solana', min: '0.001 USDC', qr: BASE + 'icons/qr-usdc.png', note: 'USDC is sent on the Solana network. The address is case sensitive.' },
 };
 function supportHtml() {
   const tab = (id) => `<button type="button" class="tab" data-token="${id}" role="tab"><i class="coin ${id}">${TOKENS[id].coin}</i>${TOKENS[id].ticker}</button>`;
   const hl = (t) => `<b>${t}</b>`;
   return `<div class="support" id="support">
     <button type="button" class="head" aria-expanded="false"><span class="heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 2.7 4.5 6.3 4.5c2 0 3.7 1.1 4.6 2.7h2.2c.9-1.6 2.6-2.7 4.6-2.7 3.6 0 5.4 3.7 3.9 7.2C19.5 16.4 12 21 12 21z"/></svg></span>
-      <span class="t"><b>Support our work</b><span>Free, no ads. A tip keeps it running.</span></span>${ICON.chev}</button>
+      <span class="t"><b>Support our work</b><span>Free, no ads. A tip keeps it running.</span></span><span class="closelbl">Close</span>${ICON.chev}</button>
     <div class="body"><div class="dep">
       <div class="tabs" role="tablist">${tab('sol')}${tab('usdc')}</div>
       <div class="dcard">
-        <div class="qrbox"><img id="dep-qr" src="${BASE}icons/qr-sol.png" alt="QR code of the wallet address" width="132" height="132"></div>
+        <div class="qrbox"><img id="dep-qr" src="${BASE}icons/qr-sol.png" alt="QR code of the wallet address" width="190" height="190"></div>
         <div class="k">Wallet address</div>
         <div class="addrrow">
           <div class="addr3" title="${WALLET}"><span><i>${WALLET.slice(0, 6)}</i>${WALLET.slice(6, 22)}</span><span>${WALLET.slice(22, -6)}<i>${WALLET.slice(-6)}</i></span></div>
@@ -27,14 +27,27 @@ function supportHtml() {
         <div class="grid2">
           <div><span class="k">Token</span><span class="v" id="dep-token"></span></div>
           <div><span class="k">Minimum</span><span class="v" id="dep-min"></span></div>
+          <div><span class="k">Address for</span><span class="v">SOL and USDC</span></div>
+          <div><span class="k">Network</span><span class="v">Solana</span></div>
         </div>
-        <p class="fine">Same address for SOL and USDC, on the Solana network. Double-check every character: crypto transfers cannot be reversed.</p>
+        <p class="fine">Double-check every character before sending. Crypto transfers cannot be reversed. Only send on the Solana network.</p>
       </div>
     </div></div></div>`;
 }
 function wireSupport() {
   const root = $('support');
-  root.querySelector('.head').addEventListener('click', (e) => { const o = root.classList.toggle('open'); e.currentTarget.setAttribute('aria-expanded', String(o)); });
+  const head = root.querySelector('.head');
+  const host = root.parentElement;
+  const setOpen = (open) => {
+    // the bar keeps its place in the page while the sheet covers the screen
+    host.style.minHeight = open ? host.offsetHeight + 'px' : '';
+    root.classList.toggle('open', open);
+    document.documentElement.classList.toggle('support-open', open);
+    head.setAttribute('aria-expanded', String(open));
+    if (open) root.scrollTop = 0;
+  };
+  head.addEventListener('click', () => setOpen(!root.classList.contains('open')));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
   const pick = (id) => {
     const t = TOKENS[id];
     root.querySelectorAll('.tab').forEach((b) => { const on = b.dataset.token === id; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
