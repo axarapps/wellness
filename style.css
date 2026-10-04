@@ -158,3 +158,12 @@ body.gated main { visibility: hidden; }
 .about-btn svg { width: 22px; height: 22px; }
 .about-btn:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* family pages: back button, family logo + title, info button */
+.topbar.fam { gap: 10px; }
+.topbar.fam .top { flex: 1; min-width: 0; padding: 14px 0 8px; }
+.topbar.fam .top b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar.fam .about-btn { margin-top: 4px; }
+.feats { padding-left: 20px; color: var(--muted); } .feats li { margin: 6px 0; }
+.share { display: inline-flex; align-items: center; gap: 10px; margin: 22px 0 6px; padding: 14px 24px; border: 0; border-radius: 999px; background: var(--rose); color: var(--bg); font: 700 16px var(--body); cursor: pointer; }
+.share svg { width: 20px; height: 20px; }
+.share:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
